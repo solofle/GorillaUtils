@@ -9,7 +9,7 @@
     "additionalData": {
       "overrideSoName": "libgorilla-utils.so",
       "branchName": "version-v0.1.0",
-      "soLink": "https://github.com/RedBrumbler/GorillaUtils/releases/download/0.1.0/libgorillautils.so"
+      "soLink": "https://github.com/RedBrumbler/GorillaUtils/releases/download/0.1.0/libgorilla-utils.so"
     }
   },
   "dependencies": [
