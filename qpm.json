@@ -1,0 +1,33 @@
+{
+  "sharedDir": "shared",
+  "dependenciesDir": "extern",
+  "info": {
+    "name": "Gorilla Utils",
+    "id": "gorilla-utils",
+    "version": "0.1.0",
+    "url": "https://github.com/RedBrumbler/GorillaUtils",
+    "additionalData": {
+      "overrideSoName": "libgorilla-utils.so",
+      "branchName": "version-v0.1.0",
+      "soLink": "https://github.com/RedBrumbler/GorillaUtils/releases/download/0.1.0/libgorillautils.so"
+    }
+  },
+  "dependencies": [
+    {
+      "id": "monkecodegen",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "beatsaber-hook",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "custom-types",
+      "versionRange": "^0.8.3",
+      "additionalData": {}
+    }
+  ],
+  "additionalData": {}
+}
