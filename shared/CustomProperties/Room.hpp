@@ -6,12 +6,15 @@
 #include <type_traits>
 #include <optional>
 #include "Photon/Realtime/Room.hpp"
+#include "Photon/Realtime/WebFlags.hpp"
 #include "ExitGames/Client/Photon/Hashtable.hpp"
 
 namespace GorillaUtils::Room
 {
     using Room = Photon::Realtime::Room;
+    using WebFlags = Photon::Realtime::WebFlags;
     using Hashtable = ExitGames::Client::Photon::Hashtable;
+    using Hashtable_Base = System::Collections::Generic::Dictionary_2<Il2CppObject*, Il2CppObject*>;
 
     /// @brief gets a property from the room custom properties
     /// @param room the room to get the property on
@@ -25,7 +28,7 @@ namespace GorillaUtils::Room
         if (!properties) return std::nullopt;
 
         Il2CppString* propCS = il2cpp_utils::newcsstr(property);
-        if (!properties->::System::Collections::Generic::Dictionary_2<Il2CppObject*, Il2CppObject*>::ContainsKey(propCS)) return std::nullopt;
+        if (!properties->Hashtable_Base::ContainsKey(propCS)) return std::nullopt;
 
         Il2CppObject* item = properties->get_Item(propCS);
         if (std::is_pointer<T>::value) return (T)item;
@@ -40,14 +43,13 @@ namespace GorillaUtils::Room
     void SetProperty(Room* room, std::string property, T val)
     {
         if (!room) return;
-        Hashtable* properties = room->get_CustomProperties();
-        if (!properties) return;
-        
         Il2CppString* propCS = il2cpp_utils::newcsstr(property);
         Il2CppObject* key = il2cpp_functions::value_box(classof(Il2CppString*), propCS);
         Il2CppObject* value = il2cpp_functions::value_box(classof(T), std::is_pointer<T>::value ? val : &val);
         
-        properties->System::Collections::Generic::Dictionary_2<Il2CppObject*, Il2CppObject*>::Add(key, value);
-        room->SetCustomProperties(properties, nullptr, nullptr);
+        Hashtable* properties = *il2cpp_utils::New<Hashtable*>();
+        properties->Hashtable_Base::Add(key, value);
+
+        room->SetCustomProperties(properties, nullptr, WebFlags::_get_Default());
     }
 }
