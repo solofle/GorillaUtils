@@ -45,7 +45,7 @@ namespace GorillaUtils::Room
         if (!room) return;
         Il2CppString* propCS = il2cpp_utils::newcsstr(property);
         Il2CppObject* key = il2cpp_functions::value_box(classof(Il2CppString*), propCS);
-        Il2CppObject* value = il2cpp_functions::value_box(classof(T), std::is_pointer<T>::value ? val : &val);
+        Il2CppObject* value = std::is_pointer<T>::value ? val : il2cpp_functions::value_box(classof(T), &val);
         
         Hashtable* properties = *il2cpp_utils::New<Hashtable*>();
         properties->Hashtable_Base::Add(key, value);

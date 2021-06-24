@@ -1,31 +1,21 @@
 #pragma once
+#include <type_traits>
 
 namespace GorillaUtils::ArrayUtils
 {
     template<typename T>
-    T* toPtr(T& val)
-    {
-        static_assert(is_value_type<T>());
-        return &val;
-    }
-    
-    template<typename T>
-    T* toPtr(T* val)
-    {
-        static_assert(std::is_pointer<T>());
-        return val;
-    }
-    
-    template<typename T>
     void box_array(Array<Il2CppObject*>* arr, int index, T val) 
     {
-        arr->values[index] = il2cpp_functions::value_box(classof(T), toPtr(val));
+        if constexpr (std::is_pointer_v<T>) arr->values[index] = val;
+        else arr->values[index] = il2cpp_functions::value_box(classof(T), &val);
     }
     
     template <typename First, typename... Rest>
     void box_array(Array<Il2CppObject*>* arr, int index, First& first, Rest&... rest)
     {
-        arr->values[index] = il2cpp_functions::value_box(classof(First), toPtr(first));
+        if constexpr (std::is_pointer_v<First>) arr->values[index] = first;
+        else arr->values[index] = il2cpp_functions::value_box(classof(First), &first);
+
         box_array(arr, ++index, rest...);
     }
     

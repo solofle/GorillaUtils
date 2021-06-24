@@ -16,7 +16,7 @@ namespace GorillaUtils::RPC
         if (!photonView) return;
         Il2CppString* methodName = il2cpp_utils::newcsstr(method);
 
-        constexpr auto numargs {sizeof...(params)};
+        constexpr int numargs = sizeof...(params);
 
         Array<Il2CppObject*>* arr = reinterpret_cast<Array<Il2CppObject*>*>(il2cpp_functions::array_new(classof(Il2CppObject*), numargs));
         GorillaUtils::ArrayUtils::box_array(arr, params...);
@@ -30,7 +30,7 @@ namespace GorillaUtils::RPC
         if (!photonView) return;
         Il2CppString* methodName = il2cpp_utils::newcsstr(method);
 
-        constexpr auto numargs {sizeof...(params)};
+        constexpr int numargs = sizeof...(params);
 
         Array<Il2CppObject*>* arr = reinterpret_cast<Array<Il2CppObject*>*>(il2cpp_functions::array_new(classof(Il2CppObject*), numargs));
         GorillaUtils::ArrayUtils::box_array(arr, params...);
