@@ -5,6 +5,7 @@
 #include "custom-types/shared/register.hpp"
 #include "NetworkJoinTrigger.hpp"
 #include "Utils/RPC.hpp"
+#include "GorillaUtilsInternal.hpp"
 
 ModInfo modInfo;
 bool loaded = false;
@@ -57,6 +58,7 @@ void loadLib()
     logger.info("Installing ErrorInfoCallbacks hooks...");
     installErrorInfoCallbackHooks(logger);
     logger.info("Installed ErrorInfoCallbacks hooks!");
-
+    
     custom_types::Register::RegisterType<GorillaUtils::NetworkJoinTrigger>();
+    GorillaUtils::RegisterCheckCallbacks();
 }
