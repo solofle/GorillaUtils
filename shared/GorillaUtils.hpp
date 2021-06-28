@@ -5,7 +5,10 @@
 
 namespace GorillaUtils
 {
+    /// @brief initializes the lib
     void Init();
+
+    /// @brief innitializes the lib
     void Innit();
 
     /// @brief registers a boolean to be automatically updated upon joining lobbies
