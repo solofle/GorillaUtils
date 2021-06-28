@@ -2,22 +2,24 @@
 
 #include <vector>
 #include <string>
+#include "modloader/shared/modloader.hpp"
 
 namespace GorillaUtils
 {
     class DisablingValueContainer
     {
         public:
-            DisablingValueContainer(bool& value, bool allowLocal, std::vector<std::string> queues) : value(value), allowLocal(allowLocal), queues(queues) {};
+            DisablingValueContainer(ModInfo info, bool& value, bool allowLocal, std::vector<std::string> queues) : info(info), value(&value), allowLocal(allowLocal), queues(queues) {};
 
             void set_ifLocal()
             {
-                value = allowLocal;
+                if (value)
+                    *value = allowLocal;
             }
 
             void set_value(bool value)
             {
-                this->value = value;
+                if (this->value) *this->value = value;
             }
 
             /// @brief checks if the queue contains any of the allowed queues
@@ -33,8 +35,20 @@ namespace GorillaUtils
                 return false;
             }
             
+            bool get_value()
+            {
+                if (value) return *value;
+                else return false;
+            }
+
+            ModInfo get_info()
+            {
+                return info;
+            }
+            
         private:
-            bool& value;
+            ModInfo info;
+            bool* value;
             bool allowLocal;
             std::vector<std::string> queues = {};
     };
