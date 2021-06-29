@@ -100,7 +100,7 @@ namespace GorillaUtils
 
         // log it
         getLogger().info("%s", json.c_str());
-        // set the property on the room 
+        // set the property on the player 
         Player::SetProperty<Il2CppString*>(Photon::Pun::PhotonNetwork::get_LocalPlayer(), "mods", il2cpp_utils::newcsstr(json));
     }
 
