@@ -98,8 +98,6 @@ namespace GorillaUtils
         // make string out of buffer data
         std::string json(buffer.GetString(), buffer.GetSize());
 
-        // log it
-        getLogger().info("%s", json.c_str());
         // set the property on the player 
         Player::SetProperty<Il2CppString*>(Photon::Pun::PhotonNetwork::get_LocalPlayer(), "mods", il2cpp_utils::newcsstr(json));
     }
