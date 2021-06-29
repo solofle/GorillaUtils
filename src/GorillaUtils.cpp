@@ -1,10 +1,14 @@
+#include "beatsaber-hook/shared/rapidjson/include/rapidjson/document.h"
+#include "beatsaber-hook/shared/rapidjson/include/rapidjson/stringbuffer.h"
+#include "beatsaber-hook/shared/rapidjson/include/rapidjson/prettywriter.h"
+
 #include "GorillaUtils.hpp"
 #include "GorillaUtilsInternal.hpp"
 #include "beatsaber-hook/shared/utils/logging.hpp" 
 
 #include "Callbacks/MatchMakingCallbacks.hpp"
 #include "Utils/Room.hpp"
-#include "CustomProperties/Room.hpp"
+#include "CustomProperties/Player.hpp"
 
 #include "Photon/Pun/PhotonNetwork.hpp"
 #include "ExitGames/Client/Photon/Hashtable.hpp"
@@ -39,17 +43,20 @@ namespace GorillaUtils
 
     void OnJoinedRoom()
     {
-        if (containers.size() == 0) return;
-
         auto gameModeOptional = Room::getRoomGameMode();
         if (!gameModeOptional) gameModeOptional = Room::getGameMode();
         std::string gameMode = "";
         if (gameModeOptional) gameMode = *gameModeOptional;
 
-        std::stringstream sstream;
+        // setup json doc to get an allocator
+        rapidjson::Document d;
+        d.SetObject();
+        rapidjson::Document::AllocatorType& allocator = d.GetAllocator();  
+        
+        // known mods, this means we can know if the mod was enabled/disabled by the lib
+        rapidjson::Value known;
+        known.SetObject();
 
-        sstream << std::boolalpha;
-        sstream << "{ ";
         for(auto c : containers)
         {
             // if private, set true
@@ -58,14 +65,43 @@ namespace GorillaUtils
             {
                 c.set_value(c.checkQueue(gameMode));
             }
+
             const ModInfo& info = c.get_info();
-            sstream << '\"' << info.id << '|'<< info.version << "\": " << c.get_value() << ", "; 
+            std::string name = string_format("%s|%s", info.id.c_str(), info.version.c_str());
+            rapidjson::Value jsonName = rapidjson::Value(name.c_str(), name.size(), allocator);
+            known.AddMember(jsonName, c.get_value(), allocator);
         }
-        sstream << "}";
 
-        std::string text = sstream.str();
+        // just list all the installed Mod IDs
+        rapidjson::Value installedIDs(rapidjson::kArrayType);
+        installedIDs.SetArray();
 
-        Room::SetProperty(Photon::Pun::PhotonNetwork::get_CurrentRoom(), "mods", il2cpp_utils::newcsstr(text));
+        for (const auto& m : Modloader::getMods())
+        {
+            const ModInfo& info = m.second.info;
+            std::string name = string_format("%s|%s", info.id.c_str(), info.version.c_str());
+            installedIDs.PushBack(rapidjson::Value(name.c_str(), name.size(), allocator), allocator);
+        }
+
+        // add it to the doc
+        d.AddMember("known", known, allocator);
+        d.AddMember("installedIDs", installedIDs, allocator);
+        
+        // stringify document
+        rapidjson::StringBuffer buffer;
+        buffer.Clear();
+
+        // pretty writer for readability
+        rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
+        d.Accept(writer);
+
+        // make string out of buffer data
+        std::string json(buffer.GetString(), buffer.GetSize());
+
+        // log it
+        getLogger().info("%s", json.c_str());
+        // set the property on the room 
+        Player::SetProperty<Il2CppString*>(Photon::Pun::PhotonNetwork::get_LocalPlayer(), "mods", il2cpp_utils::newcsstr(json));
     }
 
     void OnLeftRoom()

@@ -31,6 +31,8 @@ extern void installErrorInfoCallbackHooks(Logger& logger);
 
 void loadLib()
 {
+
+
     if (loaded) return;
     loaded = true;
     Logger& logger = getLogger();

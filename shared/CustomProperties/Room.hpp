@@ -23,6 +23,8 @@ namespace GorillaUtils::Room
     template <typename T>
     std::optional<T> GetProperty(Room* room, std::string property)
     {
+        static_assert(std::is_convertible<T, Il2CppObject*>::value || std::is_arithmetic<T>::value, "Property type should be convertible to Il2CppObject*, or be an arithmetic type");
+        
         if (!room) return std::nullopt;
         Hashtable* properties = room->get_CustomProperties();
         if (!properties) return std::nullopt;
@@ -31,7 +33,7 @@ namespace GorillaUtils::Room
         if (!properties->Hashtable_Base::ContainsKey(propCS)) return std::nullopt;
 
         Il2CppObject* item = properties->get_Item(propCS);
-        if (std::is_pointer<T>::value) return (T)item;
+        if constexpr (std::is_pointer<T>::value) return (T)item;
         else return *(T*)il2cpp_functions::object_unbox(item);
     }
 
@@ -42,10 +44,15 @@ namespace GorillaUtils::Room
     template <typename T> 
     void SetProperty(Room* room, std::string property, T val)
     {
+        static_assert(std::is_convertible<T, Il2CppObject*>::value || std::is_arithmetic<T>::value, "Property type should be convertible to Il2CppObject*, or be an arithmetic type");
+
         if (!room) return;
         Il2CppString* propCS = il2cpp_utils::newcsstr(property);
-        Il2CppObject* key = il2cpp_functions::value_box(classof(Il2CppString*), propCS);
-        Il2CppObject* value = std::is_pointer<T>::value ? val : il2cpp_functions::value_box(classof(T), &val);
+        Il2CppObject* key = propCS;
+        Il2CppObject* value;
+
+        if constexpr (std::is_pointer<T>::value) value = val;
+        else value = il2cpp_functions::value_box(classof(T), &val);
         
         Hashtable* properties = *il2cpp_utils::New<Hashtable*>();
         properties->Hashtable_Base::Add(key, value);
