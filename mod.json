@@ -5,7 +5,7 @@
     "author": "RedBrumbler",
     "version": "0.1.4",
     "packageId": "com.AnotherAxiom.GorillaTag",
-    "packageVersion": "1.0.8",
+    "packageVersion": "1.0.9",
     "description": "Library that provides utils to modders",
     "coverImage": "cover.png",
     "type": "Gameplay",
