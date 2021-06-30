@@ -5,6 +5,9 @@
 
 #include "Callbacks/InRoomCallbacksInternal.hpp"
 
+#include "Photon/Realtime/Player.hpp"
+#include "Photon/Realtime/InRoomCallbacksContainer.hpp"
+#include "ExitGames/Client/Photon/Hashtable.hpp"
 namespace Photon::Realtime {
     class InRoomCallbacksContainer;
 }
@@ -15,6 +18,8 @@ using Hashtable = ExitGames::Client::Photon::Hashtable;
 using InRoomCallbacksContainer = Photon::Realtime::InRoomCallbacksContainer;
 
 using namespace GorillaUtils;
+
+extern Logger& getLogger();
 
 // InRoomCallbacksContainer Hooks
 MAKE_HOOK_OFFSETLESS(InRoomCallbacksContainer_OnPlayerEnteredRoom, void, InRoomCallbacksContainer* self, Player* newPlayer)
@@ -51,7 +56,7 @@ void installInRoomCallbackHooks(Logger& logger)
 {
     INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnPlayerEnteredRoom, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnPlayerEnteredRoom", 1));
     INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnPlayerLeftRoom, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnPlayerLeftRoom", 1));
-    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnPlayerEnteredRoom, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnRoomPropertiesUpdate", 1));
-    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnPlayerEnteredRoom, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnPlayerPropertiesUpdate", 2));
-    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnPlayerEnteredRoom, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnMasterClientSwitched", 1));
+    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnRoomPropertiesUpdate, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnRoomPropertiesUpdate", 1));
+    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnPlayerPropertiesUpdate, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnPlayerPropertiesUpdate", 2));
+    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnMasterClientSwitched, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnMasterClientSwitched", 1));
 }
