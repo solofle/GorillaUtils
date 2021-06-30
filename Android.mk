@@ -20,6 +20,8 @@ rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
 # Creating prebuilt for dependency: modloader - version: 1.1.0
 include $(CLEAR_VARS)
+# Creating prebuilt for dependency: modloader - version: 1.1.0
+include $(CLEAR_VARS)
 LOCAL_MODULE := modloader
 LOCAL_EXPORT_C_INCLUDES := extern/modloader
 LOCAL_SRC_FILES := extern/libmodloader.so
@@ -31,11 +33,11 @@ LOCAL_MODULE := beatsaber-hook_1_3_5
 LOCAL_EXPORT_C_INCLUDES := extern/beatsaber-hook
 LOCAL_SRC_FILES := extern/libbeatsaber-hook_1_3_5.so
 include $(PREBUILT_SHARED_LIBRARY)
-# Creating prebuilt for dependency: monkecodegen - version: 0.5.0
+# Creating prebuilt for dependency: monkecodegen - version: 0.6.0
 include $(CLEAR_VARS)
-LOCAL_MODULE := monkecodegen_0_5_0
+LOCAL_MODULE := monkecodegen_0_6_0
 LOCAL_EXPORT_C_INCLUDES := extern/monkecodegen
-LOCAL_SRC_FILES := extern/libmonkecodegen_0_5_0.so
+LOCAL_SRC_FILES := extern/libmonkecodegen_0_6_0.so
 include $(PREBUILT_SHARED_LIBRARY)
 # Creating prebuilt for dependency: custom-types - version: 0.8.3
 include $(CLEAR_VARS)
@@ -54,8 +56,8 @@ LOCAL_SRC_FILES += $(call rwildcard,extern/beatsaber-hook/src/inline-hook,*.c)
 LOCAL_SHARED_LIBRARIES += modloader
 LOCAL_SHARED_LIBRARIES += beatsaber-hook_1_3_5
 LOCAL_SHARED_LIBRARIES += custom-types
-LOCAL_SHARED_LIBRARIES += monkecodegen_0_5_0
+LOCAL_SHARED_LIBRARIES += monkecodegen_0_6_0
 LOCAL_LDLIBS += -llog
-LOCAL_CFLAGS += -I'D:/il2cpp/libil2cpp' -isystem 'extern' -I'extern/monkecodegen/include' -DID='"GorillaUtils"' -DVERSION='"0.1.3"' -I'./shared' -I'./extern' -Wno-inaccessible-base
+LOCAL_CFLAGS += -I'D:/il2cpp/libil2cpp' -isystem 'extern' -I'extern/monkecodegen/include' -DID='"GorillaUtils"' -DVERSION='"0.1.4"' -I'./shared' -I'./extern' -Wno-inaccessible-base
 LOCAL_C_INCLUDES += ./include ./src
 include $(BUILD_SHARED_LIBRARY)
