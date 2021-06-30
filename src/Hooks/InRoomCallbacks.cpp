@@ -5,9 +5,6 @@
 
 #include "Callbacks/InRoomCallbacksInternal.hpp"
 
-#include "Photon/Realtime/Player.hpp"
-#include "Photon/Realtime/InRoomCallbacksContainer.hpp"
-#include "ExitGames/Client/Photon/Hashtable.hpp"
 namespace Photon::Realtime {
     class InRoomCallbacksContainer;
 }

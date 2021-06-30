@@ -3,7 +3,7 @@
     "name": "Gorilla Utils",
     "id": "gorillautils",
     "author": "RedBrumbler",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "packageId": "com.AnotherAxiom.GorillaTag",
     "packageVersion": "1.0.9",
     "description": "Library that provides utils to modders",

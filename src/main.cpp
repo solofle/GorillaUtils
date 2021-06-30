@@ -62,5 +62,4 @@ void loadLib()
     logger.info("Installed ErrorInfoCallbacks hooks!");
     
     custom_types::Register::RegisterType<GorillaUtils::NetworkJoinTrigger>();
-    GorillaUtils::RegisterCheckCallbacks();
 }

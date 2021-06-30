@@ -4,12 +4,12 @@
   "info": {
     "name": "Gorilla Utils",
     "id": "gorilla-utils",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "url": "https://github.com/RedBrumbler/GorillaUtils",
     "additionalData": {
       "overrideSoName": "libgorilla-utils.so",
-      "branchName": "version-v0.1.4",
-      "soLink": "https://github.com/RedBrumbler/GorillaUtils/releases/download/0.1.4/libgorilla-utils.so"
+      "branchName": "version-v0.1.5",
+      "soLink": "https://github.com/RedBrumbler/GorillaUtils/releases/download/0.1.5/libgorilla-utils.so"
     }
   },
   "dependencies": [

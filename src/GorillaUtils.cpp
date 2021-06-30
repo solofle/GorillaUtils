@@ -35,12 +35,6 @@ namespace GorillaUtils
         Init();
     }
 
-    void RegisterCheckCallbacks()
-    {
-        MatchMakingCallbacks::add_OnJoinedRoom(&OnJoinedRoom);
-        MatchMakingCallbacks::add_OnLeftRoom(&OnLeftRoom);
-    }
-
     void OnJoinedRoom()
     {
         auto gameModeOptional = Room::getRoomGameMode();

@@ -1,6 +1,7 @@
 #include "beatsaber-hook/shared/utils/utils.h"
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
 
+#include "GorillaUtilsInternal.hpp"
 #include "modloader/shared/modloader.hpp"
 
 #include "Callbacks/MatchMakingCallbacksInternal.hpp"
@@ -27,6 +28,7 @@ MAKE_HOOK_OFFSETLESS(MatchMakingCallbacksContainer_OnJoinedRoom, void, MatchMaki
 {
     MatchMakingCallbacksContainer_OnJoinedRoom(self);
     MatchMakingCallbacks::OnJoinedRoom();
+    GorillaUtils::OnJoinedRoom();
 }
 
 MAKE_HOOK_OFFSETLESS(MatchMakingCallbacksContainer_OnCreateRoomFailed, void, MatchMakingCallbacksContainer* self, short returnCode, Il2CppString* message)
@@ -51,6 +53,7 @@ MAKE_HOOK_OFFSETLESS(MatchMakingCallbacksContainer_OnLeftRoom, void, MatchMaking
 {
     MatchMakingCallbacksContainer_OnLeftRoom(self);
     MatchMakingCallbacks::OnLeftRoom();
+    GorillaUtils::OnLeftRoom();
 }
 
 MAKE_HOOK_OFFSETLESS(MatchMakingCallbacksContainer_OnFriendListUpdate, void, MatchMakingCallbacksContainer* self, FriendList* friendList)
