@@ -7,6 +7,11 @@
 #include "Utils/RPC.hpp"
 #include "GorillaUtilsInternal.hpp"
 
+#include "GlobalNamespace/OVRManager.hpp"
+#include "OVRUpdater.hpp"
+#include "UnityEngine/GameObject.hpp"
+#include "UnityEngine/Object.hpp"
+
 ModInfo modInfo;
 bool loaded = false;
 
@@ -22,6 +27,18 @@ extern "C" void setup(ModInfo& info)
     info.version = VERSION;
 }
 
+MAKE_HOOK_OFFSETLESS(GorillaComputer_Start, void, Il2CppObject* self)
+{
+    GorillaComputer_Start(self);
+    using GameObject = UnityEngine::GameObject;
+    using Object = UnityEngine::Object;
+    
+    GameObject* obj = GameObject::New_ctor(); 
+    Object::DontDestroyOnLoad(obj);
+
+    obj->AddComponent<GorillaUtils::OVRUpdater*>();
+}
+
 extern void installConnectionCallbackHooks(Logger& logger);
 extern void installMatchMakingCallbackHooks(Logger& logger);
 extern void installInRoomCallbackHooks(Logger& logger);
@@ -31,12 +48,12 @@ extern void installErrorInfoCallbackHooks(Logger& logger);
 
 void loadLib()
 {
-
-
     if (loaded) return;
     loaded = true;
     Logger& logger = getLogger();
     
+    INSTALL_HOOK_OFFSETLESS(logger, GorillaComputer_Start, il2cpp_utils::FindMethodUnsafe("", "GorillaComputer", "Start", 0));
+
     logger.info("Installing ConnectionCallbacks hooks...");
     installConnectionCallbackHooks(logger);
     logger.info("Installed ConnectionCallbacks hooks!");
@@ -62,4 +79,5 @@ void loadLib()
     logger.info("Installed ErrorInfoCallbacks hooks!");
     
     custom_types::Register::RegisterType<GorillaUtils::NetworkJoinTrigger>();
+    custom_types::Register::RegisterType<GorillaUtils::OVRUpdater>();
 }
