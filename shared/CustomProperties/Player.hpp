@@ -48,7 +48,7 @@ namespace GorillaUtils::Player
     template <typename T> 
     void SetProperty(Player* player, std::string property, T val)
     {
-        static_assert(std::is_convertible<T, Il2CppObject*&>::value || std::is_arithmetic<T>::value, "Property type should be convertible to Il2CppObject*, or be an arithmetic type");
+        static_assert(std::is_convertible<T, Il2CppObject*>::value || std::is_arithmetic<T>::value, "Property type should be convertible to Il2CppObject*, or be an arithmetic type");
 
         if (!player) return;
         Il2CppString* propCS = il2cpp_utils::newcsstr(property);

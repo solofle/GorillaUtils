@@ -53,7 +53,7 @@ namespace GorillaUtils::Room
         Il2CppObject* key = propCS;
         Il2CppObject* value;
 
-        if constexpr (std::is_pointer_v<T>::value) value = val;
+        if constexpr (std::is_pointer_v<T>) value = val;
         else value = il2cpp_functions::value_box(classof(T), &val);
         
         Hashtable* properties = *il2cpp_utils::New<Hashtable*>();
