@@ -8,6 +8,7 @@
 #include "Photon/Realtime/Room.hpp"
 #include "Photon/Realtime/WebFlags.hpp"
 #include "ExitGames/Client/Photon/Hashtable.hpp"
+#include "System/Collections/Generic/KeyValuePair_2.hpp"
 
 namespace GorillaUtils::Room
 {
@@ -15,6 +16,7 @@ namespace GorillaUtils::Room
     using WebFlags = Photon::Realtime::WebFlags;
     using Hashtable = ExitGames::Client::Photon::Hashtable;
     using Hashtable_Base = System::Collections::Generic::Dictionary_2<Il2CppObject*, Il2CppObject*>;
+    using Pair = System::Collections::Generic::KeyValuePair_2<Il2CppObject*, Il2CppObject*>;
 
     /// @brief gets a property from the room custom properties
     /// @param room the room to get the property on
@@ -33,7 +35,7 @@ namespace GorillaUtils::Room
         if (!properties->Hashtable_Base::ContainsKey(propCS)) return std::nullopt;
 
         Il2CppObject* item = properties->get_Item(propCS);
-        if constexpr (std::is_pointer<T>::value) return (T)item;
+        if constexpr (std::is_pointer_v<T>) return (T)item;
         else return *(T*)il2cpp_functions::object_unbox(item);
     }
 
@@ -51,12 +53,14 @@ namespace GorillaUtils::Room
         Il2CppObject* key = propCS;
         Il2CppObject* value;
 
-        if constexpr (std::is_pointer<T>::value) value = val;
+        if constexpr (std::is_pointer_v<T>::value) value = val;
         else value = il2cpp_functions::value_box(classof(T), &val);
         
         Hashtable* properties = *il2cpp_utils::New<Hashtable*>();
-        properties->Hashtable_Base::Add(key, value);
-
+        // dont ask me why I am using a pair, but that makes it work properly
+        Pair pair = Pair(key, value);
+        // fucking long name but it funny
+        properties->Hashtable_Base::System_Collections_Generic_ICollection$System_Collections_Generic_KeyValuePair$TKey_TValue$$_Add(pair);
         room->SetCustomProperties(properties, nullptr, WebFlags::_get_Default());
     }
 }
