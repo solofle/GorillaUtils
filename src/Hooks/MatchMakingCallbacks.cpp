@@ -27,8 +27,8 @@ MAKE_HOOK_OFFSETLESS(MatchMakingCallbacksContainer_OnCreatedRoom, void, MatchMak
 MAKE_HOOK_OFFSETLESS(MatchMakingCallbacksContainer_OnJoinedRoom, void, MatchMakingCallbacksContainer* self)
 {
     MatchMakingCallbacksContainer_OnJoinedRoom(self);
-    MatchMakingCallbacks::OnJoinedRoom();
     GorillaUtils::OnJoinedRoom();
+    MatchMakingCallbacks::OnJoinedRoom();
 }
 
 MAKE_HOOK_OFFSETLESS(MatchMakingCallbacksContainer_OnCreateRoomFailed, void, MatchMakingCallbacksContainer* self, short returnCode, Il2CppString* message)
@@ -52,8 +52,8 @@ MAKE_HOOK_OFFSETLESS(MatchMakingCallbacksContainer_OnJoinRoomFailed, void, Match
 MAKE_HOOK_OFFSETLESS(MatchMakingCallbacksContainer_OnLeftRoom, void, MatchMakingCallbacksContainer* self)
 {
     MatchMakingCallbacksContainer_OnLeftRoom(self);
-    MatchMakingCallbacks::OnLeftRoom();
     GorillaUtils::OnLeftRoom();
+    MatchMakingCallbacks::OnLeftRoom();
 }
 
 MAKE_HOOK_OFFSETLESS(MatchMakingCallbacksContainer_OnFriendListUpdate, void, MatchMakingCallbacksContainer* self, FriendList* friendList)
