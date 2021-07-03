@@ -51,10 +51,18 @@ namespace GorillaUtils
         rapidjson::Value known;
         known.SetObject();
 
-        for(auto c : containers)
+        auto result = Room::getIsPrivate();
+        for(auto& c : containers)
         {
+            if (!result) // if not in room or something, really weird stuff is happening
+            {
+                c.set_value(false); // just disable the mod
+            }
             // if private, set true
-            if (Room::getIsPrivate()) c.set_value(true);
+            else if (*result) 
+            {
+                c.set_value(true);
+            }
             else // if public
             {
                 c.set_value(c.checkQueue(gameMode));
@@ -100,7 +108,7 @@ namespace GorillaUtils
     {
         if (containers.size() == 0) return;
 
-        for(auto c : containers)
+        for(auto& c : containers)
         {
             c.set_ifLocal();
         }
