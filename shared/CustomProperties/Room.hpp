@@ -26,7 +26,6 @@ namespace GorillaUtils::Room
     std::optional<T> GetProperty(Room* room, std::string property)
     {
         static_assert(std::is_convertible<T, Il2CppObject*>::value || std::is_arithmetic<T>::value, "Property type should be convertible to Il2CppObject*, or be an arithmetic type");
-
         if (!room) return std::nullopt;
         Hashtable* properties = room->get_CustomProperties();
         if (!properties) return std::nullopt;
@@ -50,7 +49,7 @@ namespace GorillaUtils::Room
     {
         static_assert(std::is_convertible<T, Il2CppObject*>::value || std::is_arithmetic<T>::value, "Property type should be convertible to Il2CppObject*, or be an arithmetic type");
 
-        if (!player) return;
+        if (!room) return;
         Il2CppObject* key = reinterpret_cast<Il2CppObject*>(il2cpp_utils::newcsstr(property));
         Il2CppObject* value = il2cpp_utils::ToIl2CppObject(val);
 
@@ -62,6 +61,6 @@ namespace GorillaUtils::Room
         properties->Hashtable_Base::System_Collections_Generic_ICollection$System_Collections_Generic_KeyValuePair$TKey_TValue$$_Add(pair);
         //properties->Hashtable_Base::Add(key, value);
 
-        player->SetCustomProperties(properties, nullptr, WebFlags::_get_Default());
+        room->SetCustomProperties(properties, nullptr, WebFlags::_get_Default());
     }
 }

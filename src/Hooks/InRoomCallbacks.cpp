@@ -1,3 +1,4 @@
+#include "beatsaber-hook/shared/utils/hooking.hpp"
 #include "beatsaber-hook/shared/utils/utils.h"
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
 
@@ -5,9 +6,9 @@
 
 #include "Callbacks/InRoomCallbacksInternal.hpp"
 
-namespace Photon::Realtime {
-    class InRoomCallbacksContainer;
-}
+#include "Photon/Realtime/InRoomCallbacksContainer.hpp"
+#include "Photon/Realtime/Player.hpp"
+#include "ExitGames/Client/Photon/Hashtable.hpp"
 
 using Player = Photon::Realtime::Player;
 using Hashtable = ExitGames::Client::Photon::Hashtable;
@@ -19,31 +20,31 @@ using namespace GorillaUtils;
 extern Logger& getLogger();
 
 // InRoomCallbacksContainer Hooks
-MAKE_HOOK_OFFSETLESS(InRoomCallbacksContainer_OnPlayerEnteredRoom, void, InRoomCallbacksContainer* self, Player* newPlayer)
+MAKE_HOOK_MATCH(InRoomCallbacksContainer_OnPlayerEnteredRoom, &InRoomCallbacksContainer::OnPlayerEnteredRoom, void, InRoomCallbacksContainer* self, Player* newPlayer)
 {
     InRoomCallbacksContainer_OnPlayerEnteredRoom(self, newPlayer);
     InRoomCallbacks::OnPlayerEnteredRoom(newPlayer);
 }
 
-MAKE_HOOK_OFFSETLESS(InRoomCallbacksContainer_OnPlayerLeftRoom, void, InRoomCallbacksContainer* self, Player* otherPlayer)
+MAKE_HOOK_MATCH(InRoomCallbacksContainer_OnPlayerLeftRoom, &InRoomCallbacksContainer::OnPlayerLeftRoom, void, InRoomCallbacksContainer* self, Player* otherPlayer)
 {
     InRoomCallbacksContainer_OnPlayerLeftRoom(self, otherPlayer);
     InRoomCallbacks::OnPlayerLeftRoom(otherPlayer);
 }
 
-MAKE_HOOK_OFFSETLESS(InRoomCallbacksContainer_OnRoomPropertiesUpdate, void, InRoomCallbacksContainer* self, Hashtable* propertiesThatChanged)
+MAKE_HOOK_MATCH(InRoomCallbacksContainer_OnRoomPropertiesUpdate, &InRoomCallbacksContainer::OnRoomPropertiesUpdate, void, InRoomCallbacksContainer* self, Hashtable* propertiesThatChanged)
 {
     InRoomCallbacksContainer_OnRoomPropertiesUpdate(self, propertiesThatChanged);
     InRoomCallbacks::OnRoomPropertiesUpdate(propertiesThatChanged);
 }
 
-MAKE_HOOK_OFFSETLESS(InRoomCallbacksContainer_OnPlayerPropertiesUpdate, void, InRoomCallbacksContainer* self, Player* targetPlayer, Hashtable* changedProp)
+MAKE_HOOK_MATCH(InRoomCallbacksContainer_OnPlayerPropertiesUpdate, &InRoomCallbacksContainer::OnPlayerPropertiesUpdate, void, InRoomCallbacksContainer* self, Player* targetPlayer, Hashtable* changedProp)
 {
     InRoomCallbacksContainer_OnPlayerPropertiesUpdate(self, targetPlayer, changedProp);
     InRoomCallbacks::OnPlayerPropertiesUpdate(targetPlayer, changedProp);
 }
 
-MAKE_HOOK_OFFSETLESS(InRoomCallbacksContainer_OnMasterClientSwitched, void, InRoomCallbacksContainer* self, Player* newMasterClient)
+MAKE_HOOK_MATCH(InRoomCallbacksContainer_OnMasterClientSwitched, &InRoomCallbacksContainer::OnMasterClientSwitched, void, InRoomCallbacksContainer* self, Player* newMasterClient)
 {
     InRoomCallbacksContainer_OnMasterClientSwitched(self, newMasterClient);
     InRoomCallbacks::OnMasterClientSwitched(newMasterClient);
@@ -51,9 +52,9 @@ MAKE_HOOK_OFFSETLESS(InRoomCallbacksContainer_OnMasterClientSwitched, void, InRo
 
 void installInRoomCallbackHooks(Logger& logger)
 {
-    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnPlayerEnteredRoom, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnPlayerEnteredRoom", 1));
-    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnPlayerLeftRoom, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnPlayerLeftRoom", 1));
-    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnRoomPropertiesUpdate, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnRoomPropertiesUpdate", 1));
-    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnPlayerPropertiesUpdate, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnPlayerPropertiesUpdate", 2));
-    INSTALL_HOOK_OFFSETLESS(logger, InRoomCallbacksContainer_OnMasterClientSwitched, il2cpp_utils::FindMethodUnsafe("Photon.Realtime", "InRoomCallbacksContainer", "OnMasterClientSwitched", 1));
+    INSTALL_HOOK(logger, InRoomCallbacksContainer_OnPlayerEnteredRoom);
+    INSTALL_HOOK(logger, InRoomCallbacksContainer_OnPlayerLeftRoom);
+    INSTALL_HOOK(logger, InRoomCallbacksContainer_OnRoomPropertiesUpdate);
+    INSTALL_HOOK(logger, InRoomCallbacksContainer_OnPlayerPropertiesUpdate);
+    INSTALL_HOOK(logger, InRoomCallbacksContainer_OnMasterClientSwitched);
 }

@@ -1,3 +1,4 @@
+#include "beatsaber-hook/shared/utils/hooking.hpp"
 #include "beatsaber-hook/shared/utils/utils.h"
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
 
@@ -27,7 +28,7 @@ extern "C" void setup(ModInfo& info)
     info.version = VERSION;
 }
 
-MAKE_HOOK_OFFSETLESS(GorillaComputer_Start, void, Il2CppObject* self)
+MAKE_HOOK_FIND_CLASS_UNSAFE_INSTANCE(GorillaComputer_Start, "", "GorillaComputer", "Start", void, Il2CppObject* self)
 {
     GorillaComputer_Start(self);
     using GameObject = UnityEngine::GameObject;
@@ -52,7 +53,7 @@ void loadLib()
     loaded = true;
     Logger& logger = getLogger();
     
-    INSTALL_HOOK_OFFSETLESS(logger, GorillaComputer_Start, il2cpp_utils::FindMethodUnsafe("", "GorillaComputer", "Start", 0));
+    INSTALL_HOOK(logger, GorillaComputer_Start);
 
     logger.info("Installing ConnectionCallbacks hooks...");
     installConnectionCallbackHooks(logger);
@@ -78,6 +79,5 @@ void loadLib()
     installErrorInfoCallbackHooks(logger);
     logger.info("Installed ErrorInfoCallbacks hooks!");
     
-    custom_types::Register::RegisterType<GorillaUtils::NetworkJoinTrigger>();
-    custom_types::Register::RegisterType<GorillaUtils::OVRUpdater>();
+    custom_types::Register::AutoRegister();
 }

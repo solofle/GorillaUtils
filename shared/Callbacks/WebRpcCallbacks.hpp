@@ -2,13 +2,13 @@
 
 #include <functional>
 
-namespace Photon::Realtime {
+namespace ExitGames::Client::Photon {
     class OperationResponse;
 }
 
 namespace GorillaUtils::WebRpcCallbacks
 {
-    using OperationResponse = Photon::Realtime::OperationResponse;
+    using OperationResponse = ExitGames::Client::Photon::OperationResponse;
 
     typedef std::function<void(OperationResponse*)> OnWebRpcResponseCallback;
 

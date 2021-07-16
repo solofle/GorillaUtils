@@ -1,7 +1,7 @@
 #include "OVRUpdater.hpp"
 #include "GlobalNamespace/OVRInput.hpp"
 
-DEFINE_TYPE(GorillaUtils::OVRUpdater);
+DEFINE_TYPE(GorillaUtils, OVRUpdater);
 
 namespace GorillaUtils
 {

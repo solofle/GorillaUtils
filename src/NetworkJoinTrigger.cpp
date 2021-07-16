@@ -4,7 +4,7 @@
 #include "GlobalNamespace/PhotonNetworkController.hpp"
 #include "GlobalNamespace/GorillaLevelScreen.hpp"
 
-DEFINE_TYPE(GorillaUtils::NetworkJoinTrigger);
+DEFINE_TYPE(GorillaUtils, NetworkJoinTrigger);
 
 using namespace UnityEngine;
 
