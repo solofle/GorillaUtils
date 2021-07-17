@@ -31,7 +31,7 @@ LOCAL_MODULE := custom-types
 LOCAL_EXPORT_C_INCLUDES := extern/custom-types
 LOCAL_SRC_FILES := extern/libcustom-types.so
 include $(PREBUILT_SHARED_LIBRARY)
-# Creating prebuilt for dependency: monkecodegen - version: 0.7.3
+# Creating prebuilt for dependency: monkecodegen - version: 0.7.4
 include $(CLEAR_VARS)
 LOCAL_MODULE := monkecodegen
 LOCAL_EXPORT_C_INCLUDES := extern/monkecodegen
