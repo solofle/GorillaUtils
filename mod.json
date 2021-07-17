@@ -1,32 +1,27 @@
 {
-    "_QPVersion":  "0.1.1",
-    "name":  "Gorilla Utils",
-    "id":  "gorillautils",
-    "author":  "RedBrumbler",
-    "version":  "0.2.0",
-    "packageId":  "com.AnotherAxiom.GorillaTag",
-    "packageVersion":  "1.0.10",
-    "description":  "Library that provides utils to modders",
-    "coverImage":  "cover.png",
-    "type":  "Gameplay",
-    "isLibrary":  true,
-    "dependencies":  [
-                         {
-                             "id":  "monkecodegen",
-                             "version":  ">=0.7.1",
-                             "downloadIfMissing":  "https://github.com/RedBrumbler/MonkeCodegen/releases/download/0.7.1/MonkeCodegen.qmod"
-                         }
-                     ],
-    "modFiles":  [
-
-                 ],
-    "libraryFiles":  [
-                         "libgorilla-utils.so",
-                         "libcustom-types.so",
-                         "libbeatsaber-hook_1_3_3.so",
-                         "libbeatsaber-hook_1_3_5.so"
-                     ],
-    "fileCopies":  [
-
-                   ]
+  "_QPVersion": "0.1.1",
+  "name": "Gorilla Utils",
+  "id": "gorillautils",
+  "author": "RedBrumbler",
+  "version": "0.2.0",
+  "packageId": "com.AnotherAxiom.GorillaTag",
+  "packageVersion": "1.0.9",
+  "description": "Library that provides utils to modders",
+  "coverImage": "cover.png",
+  "type": "Gameplay",
+  "isLibrary": true,
+  "dependencies": [
+    {
+      "id": "monkecodegen",
+      "version": ">=0.6.0",
+      "downloadIfMissing": "https://github.com/RedBrumbler/MonkeCodegen/releases/download/0.6.0/MonkeCodegen.qmod"
+    }
+  ],
+  "modFiles": [],
+  "libraryFiles": [
+    "libbeatsaber-hook_2_0_3.so",
+    "libcustom-types.so",
+    "libgorilla-utils.so"
+  ],
+  "fileCopies": []
 }

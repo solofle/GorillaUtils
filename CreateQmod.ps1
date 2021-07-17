@@ -7,7 +7,7 @@ $zip = $env:qmodName + ".zip"
 $qmod = $env:qmodName + ".qmod"
 
 $mod = "./mod.json"
-$modJson = Get-Content $mod | ConvertFrom-Json
+$modJson = Get-Content $mod -Raw | ConvertFrom-Json
 
 $allLibs = Get-ChildItem ./libs/arm64-v8a/*.so | Select -Expand Name
 $libs = @()
@@ -19,7 +19,8 @@ $fileList = @($cover, $mod)
 foreach ($lib in $allLibs) 
 {
     # ignore modloader
-    if ($lib.Contains("modloader"))
+
+    if ($lib.Contains("modloader") -or $lib.Contains("codegen") )
     {
         continue
     }
@@ -35,7 +36,7 @@ $qpmJson = Get-Content $qpm | ConvertFrom-Json
 $modJson.version = $qpmJson.info.version
 
 $modJson.libraryFiles = $libs
-$modText = $modJson | ConvertTo-Json -Depth 50
+$modText = $modJson | ConvertTo-Json -Depth 50 -EscapeHandling EscapeNonAscii
 
 Set-Content $mod $modText
 
