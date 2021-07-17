@@ -1,6 +1,6 @@
-#include "beatsaber-hook/shared/utils/hooking.hpp"
 #include "beatsaber-hook/shared/utils/utils.h"
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
+#include "beatsaber-hook/shared/utils/hooking.hpp"
 
 #include "modloader/shared/modloader.hpp"
 #include "custom-types/shared/register.hpp"
