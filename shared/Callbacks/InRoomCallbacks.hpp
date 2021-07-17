@@ -1,5 +1,6 @@
 #pragma once
 
+#include "beatsaber-hook/shared/utils/typedefs-wrappers.hpp"
 #include <functional>
 
 namespace Photon::Realtime {
@@ -15,21 +16,15 @@ namespace GorillaUtils::InRoomCallbacks
     using Player = Photon::Realtime::Player;
     using Hashtable = ExitGames::Client::Photon::Hashtable;
 
-    typedef std::function<void(Player*)> OnPlayerEnteredRoomCallback;
-    typedef std::function<void(Player*)> OnPlayerLeftRoomCallback;
-    typedef std::function<void(Hashtable*)> OnRoomPropertiesUpdateCallback;
-    typedef std::function<void(Player*, Hashtable*)> OnPlayerPropertiesUpdateCallback;
-    typedef std::function<void(Player*)> OnMasterClientSwitchedCallback;
+    typedef UnorderedEventCallback<Player*> OnPlayerEnteredRoomEvent;
+    typedef UnorderedEventCallback<Player*> OnPlayerLeftRoomEvent;
+    typedef UnorderedEventCallback<Hashtable*> OnRoomPropertiesUpdateEvent;
+    typedef UnorderedEventCallback<Player*, Hashtable*> OnPlayerPropertiesUpdateEvent;
+    typedef UnorderedEventCallback<Player*> OnMasterClientSwitchedEvent;
 
-    int add_OnPlayerEnteredRoom(OnPlayerEnteredRoomCallback callback);
-    int add_OnPlayerLeftRoom(OnPlayerLeftRoomCallback callback);
-    int add_OnRoomPropertiesUpdate(OnRoomPropertiesUpdateCallback callback);
-    int add_OnPlayerPropertiesUpdate(OnPlayerPropertiesUpdateCallback callback);
-    int add_OnMasterClientSwitched(OnMasterClientSwitchedCallback callback);
-
-    void remove_OnPlayerEnteredRoom(int identifier);
-    void remove_OnPlayerLeftRoom(int identifier);
-    void remove_OnRoomPropertiesUpdate(int identifier);
-    void remove_OnPlayerPropertiesUpdate(int identifier);
-    void remove_OnMasterClientSwitched(int identifier);
+    OnPlayerEnteredRoomEvent& onPlayerEnteredRoomEvent();
+    OnPlayerLeftRoomEvent& onPlayerLeftRoomEvent();
+    OnRoomPropertiesUpdateEvent& onRoomPropertiesUpdateEvent();
+    OnPlayerPropertiesUpdateEvent& onPlayerPropertiesUpdateEvent();
+    OnMasterClientSwitchedEvent& onMasterClientSwitchedEvent();
 }

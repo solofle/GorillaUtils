@@ -8,31 +8,17 @@ using AuthResult = System::Collections::Generic::Dictionary_2<Il2CppString*, Il2
 
 namespace GorillaUtils::ConnectionCallbacks
 {
-    OnConnectedCallbackContainer onConnectedCallbackContainer;
-    OnConnectedToMasterCallbackContainer onConnectedToMasterCallbackContainer;
-    OnRegionListReceivedCallbackContainer onRegionListReceivedCallbackContainer;
-    OnDisconnectedCallbackContainer onDisconnectedCallbackContainer;
-    OnCustomAuthenticationResponseCallbackContainer onCustomAuthenticationResponseCallbackContainer;
-    OnCustomAuthenticationFailedCallbackContainer onCustomAuthenticationFailedCallbackContainer;
+    EVENT(OnConnectedEvent, onConnectedEvent);
+    EVENT(OnConnectedToMasterEvent, onConnectedToMasterEvent);
+    EVENT(OnRegionListReceivedEvent, onRegionListReceivedEvent);
+    EVENT(OnDisconnectedEvent, onDisconnectedEvent);
+    EVENT(OnCustomAuthenticationResponseEvent, onCustomAuthenticationResponseEvent);
+    EVENT(OnCustomAuthenticationFailedEvent, onCustomAuthenticationFailedEvent);
 
-    void OnConnected() { RUNCALLBACKS(onConnectedCallbackContainer); }
-    void OnConnectedToMaster() { RUNCALLBACKS(onConnectedToMasterCallbackContainer); }
-    void OnRegionListReceived(RegionHandler* regionHandler) { RUNCALLBACKS(onRegionListReceivedCallbackContainer, regionHandler); }
-    void OnDisconnected(DisconnectCause& cause) { RUNCALLBACKS(onDisconnectedCallbackContainer, cause); }
-    void OnCustomAuthenticationResponse(AuthResult* data) { RUNCALLBACKS(onCustomAuthenticationResponseCallbackContainer, data); }
-    void OnCustomAuthenticationFailed(Il2CppString* debugMessage) { RUNCALLBACKS(onCustomAuthenticationFailedCallbackContainer, debugMessage); }
-
-    int add_OnConnected(OnConnectedCallback callback) { return ADD(onConnectedCallbackContainer); }
-    int add_OnConnectedToMaster(OnConnectedToMasterCallback callback) { return ADD(onConnectedToMasterCallbackContainer); }
-    int add_OnRegionListReceived(OnRegionListReceivedCallback callback) { return ADD(onRegionListReceivedCallbackContainer); }
-    int add_OnDisconnected(OnDisconnectedCallback callback) { return ADD(onDisconnectedCallbackContainer); }
-    int add_OnCustomAuthenticationResponse(OnCustomAuthenticationResponseCallback callback) { return ADD(onCustomAuthenticationResponseCallbackContainer); }
-    int add_OnCustomAuthenticationFailed(OnCustomAuthenticationFailedCallback callback) { return ADD(onCustomAuthenticationFailedCallbackContainer); }
-
-    void remove_OnConnected(int identifier) { REMOVE(onConnectedCallbackContainer); }
-    void remove_OnConnectedToMaster(int identifier) { REMOVE(onConnectedToMasterCallbackContainer); }
-    void remove_OnRegionListReceived(int identifier) { REMOVE(onRegionListReceivedCallbackContainer); }
-    void remove_OnDisconnected(int identifier) { REMOVE(onDisconnectedCallbackContainer); }
-    void remove_OnCustomAuthenticationResponse(int identifier) { REMOVE(onCustomAuthenticationResponseCallbackContainer); }
-    void remove_OnCustomAuthenticationFailed(int identifier) { REMOVE(onCustomAuthenticationFailedCallbackContainer); }
+    void OnConnected() { RUNCALLBACKS(OnConnectedEvent); }
+    void OnConnectedToMaster() { RUNCALLBACKS(OnConnectedToMasterEvent); }
+    void OnRegionListReceived(RegionHandler* regionHandler) { RUNCALLBACKS(OnRegionListReceivedEvent, regionHandler); }
+    void OnDisconnected(DisconnectCause& cause) { RUNCALLBACKS(OnDisconnectedEvent, cause); }
+    void OnCustomAuthenticationResponse(AuthResult* data) { RUNCALLBACKS(OnCustomAuthenticationResponseEvent, data); }
+    void OnCustomAuthenticationFailed(std::string debugMessage) { RUNCALLBACKS(OnCustomAuthenticationFailedEvent, debugMessage); }
 }

@@ -5,7 +5,5 @@
 
 namespace GorillaUtils::WebRpcCallbacks
 {
-    typedef CallbackContainer<OnWebRpcResponseCallback> OnWebRpcResponseCallbackContainer;
-
     void OnWebRpcResponse(OperationResponse* response);
 }

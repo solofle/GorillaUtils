@@ -4,20 +4,7 @@
 
 namespace GorillaUtils::ErrorInfoCallbacks
 {
-    OnErrorInfoCallbackContainer onErrorInfoCallbackContainer;
+    EVENT(OnErrorInfoEvent, onErrorInfoEvent);
 
-    void OnErrorInfo(ErrorInfo* response)
-    {
-        RUNCALLBACKS(onErrorInfoCallbackContainer, response);
-    }
-
-    int add_OnErrorInfo(OnErrorInfoCallback callback)
-    {
-        return ADD(onErrorInfoCallbackContainer);
-    }
-    
-    void remove_OnErrorInfo(int identifier)
-    {
-        REMOVE(onErrorInfoCallbackContainer);
-    }
+    void OnErrorInfo(ErrorInfo* response) {RUNCALLBACKS(OnErrorInfoEvent, response); }
 }

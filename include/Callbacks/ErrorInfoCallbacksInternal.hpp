@@ -5,7 +5,5 @@
 
 namespace GorillaUtils::ErrorInfoCallbacks
 {
-    typedef CallbackContainer<OnErrorInfoCallback> OnErrorInfoCallbackContainer;
-    
     void OnErrorInfo(ErrorInfo* response);
 }

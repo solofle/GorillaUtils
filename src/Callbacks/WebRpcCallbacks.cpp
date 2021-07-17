@@ -4,20 +4,7 @@
 
 namespace GorillaUtils::WebRpcCallbacks
 {
-    OnWebRpcResponseCallbackContainer onWebRpcResponseCallbackContainer;
+    EVENT(OnWebRpcResponseEvent, onWebRpcResponseEvent);
 
-    void OnWebRpcResponse(OperationResponse* response)
-    {
-        RUNCALLBACKS(onWebRpcResponseCallbackContainer, response);    
-    }
-
-    int add_OnWebRpcResponse(OnWebRpcResponseCallback callback)
-    {
-        return ADD(onWebRpcResponseCallbackContainer);
-    }
-
-    void remove_OnWebRpcResponse(int identifier)
-    {
-        REMOVE(onWebRpcResponseCallbackContainer);
-    }
+    void OnWebRpcResponse(OperationResponse* response) { RUNCALLBACKS(OnWebRpcResponseEvent, response); }
 }

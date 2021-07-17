@@ -1,5 +1,7 @@
 #pragma once
 
+#include "beatsaber-hook/shared/utils/typedefs-wrappers.hpp"
+
 #include <functional>
 
 namespace Photon::Realtime {
@@ -10,9 +12,7 @@ namespace GorillaUtils::ErrorInfoCallbacks
 {
     using ErrorInfo = Photon::Realtime::ErrorInfo;
     
-    typedef std::function<void(ErrorInfo*)> OnErrorInfoCallback;
-
-    int add_OnErrorInfo(OnErrorInfoCallback callback);
+    typedef UnorderedEventCallback<ErrorInfo*> OnErrorInfoEvent;
     
-    void remove_OnErrorInfo(int identifier);
+    OnErrorInfoEvent& onErrorInfoEvent();
 }

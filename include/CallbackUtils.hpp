@@ -4,11 +4,7 @@ extern Logger& getLogger();
 #ifndef RUNCALLBACKS
 #define RUNCALLBACKS(container, args...) \
 getLogger().info("Running Callbacks for %s", #container); \
-auto callbacks = container.get(); \
-for (auto& c : callbacks) \
-{ \
-    c.second(args); \
-}
+_ ##container.invoke(args);
 #endif
 
 #ifndef TO_CPP_STRING
@@ -21,4 +17,12 @@ for (auto& c : callbacks) \
 
 #ifndef REMOVE
 #define REMOVE(container) container.remove(identifier)
+#endif
+
+
+// Declares the variable, and defines the getter
+#ifndef EVENT
+#define EVENT(typename, getter) \
+typename _ ##typename; \
+typename& getter() {return _ ##typename; }
 #endif

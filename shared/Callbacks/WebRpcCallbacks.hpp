@@ -1,5 +1,6 @@
 #pragma once
 
+#include "beatsaber-hook/shared/utils/typedefs-wrappers.hpp"
 #include <functional>
 
 namespace ExitGames::Client::Photon {
@@ -10,9 +11,7 @@ namespace GorillaUtils::WebRpcCallbacks
 {
     using OperationResponse = ExitGames::Client::Photon::OperationResponse;
 
-    typedef std::function<void(OperationResponse*)> OnWebRpcResponseCallback;
+    typedef UnorderedEventCallback<OperationResponse*> OnWebRpcResponseEvent;
 
-    int add_OnWebRpcResponse(OnWebRpcResponseCallback callback);
-
-    void remove_OnWebRpcResponse(int identifier);
+    OnWebRpcResponseEvent& onWebRpcResponseEvent();
 }

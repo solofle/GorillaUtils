@@ -5,11 +5,6 @@
 
 namespace GorillaUtils::LobbyCallbacks
 {
-    typedef CallbackContainer<OnJoinedLobbyCallback> OnJoinedLobbyCallbackContainer;
-    typedef CallbackContainer<OnLeftLobbyCallback> OnLeftLobbyCallbackContainer;
-    typedef CallbackContainer<OnRoomListUpdateCallback> OnRoomListUpdateCallbackContainer;
-    typedef CallbackContainer<OnLobbyStatisticsUpdateCallback> OnLobbyStatisticsUpdateCallbackContainer;
-    
     void OnJoinedLobby();
     void OnLeftLobby();
     void OnRoomListUpdate(RoomList* roomList);

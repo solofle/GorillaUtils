@@ -11,6 +11,8 @@
 #include "Photon/Realtime/RegionHandler.hpp"
 #include "Photon/Realtime/DisconnectCause.hpp"
 
+#include "CallbackUtils.hpp"
+
 using ConnectionCallbacksContainer = Photon::Realtime::ConnectionCallbacksContainer;
 
 using RegionHandler = Photon::Realtime::RegionHandler;
@@ -51,7 +53,7 @@ MAKE_HOOK_MATCH(ConnectionCallbacksContainer_OnCustomAuthenticationResponse, &Co
 MAKE_HOOK_MATCH(ConnectionCallbacksContainer_OnCustomAuthenticationFailed, &ConnectionCallbacksContainer::OnCustomAuthenticationFailed, void, ConnectionCallbacksContainer* self, Il2CppString* debugMessage)
 {
     ConnectionCallbacksContainer_OnCustomAuthenticationFailed(self, debugMessage);
-    GorillaUtils::ConnectionCallbacks::OnCustomAuthenticationFailed(debugMessage);
+    GorillaUtils::ConnectionCallbacks::OnCustomAuthenticationFailed(TO_CPP_STRING(debugMessage));
 }
 
 void installConnectionCallbackHooks(Logger& logger)
