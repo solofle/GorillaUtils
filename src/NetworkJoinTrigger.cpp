@@ -23,7 +23,6 @@ namespace GorillaUtils
         leaveScreens = reinterpret_cast<Array<GlobalNamespace::GorillaLevelScreen*>*>(il2cpp_functions::array_new(classof(GlobalNamespace::GorillaLevelScreen*), 0));
 
         triggerBoxOnce = false;
-        sliderValues = reinterpret_cast<Array<float>*>(il2cpp_functions::array_new(classof(float), 0));
     }
 
     NetworkJoinTrigger* NetworkJoinTrigger::get_instance()
