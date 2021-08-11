@@ -5,16 +5,15 @@
   "author": "RedBrumbler",
   "version": "0.1.9",
   "packageId": "com.AnotherAxiom.GorillaTag",
-  "packageVersion": "1.0.10",
+  "packageVersion": "1.0.11",
   "description": "Library that provides utils to modders",
   "coverImage": "cover.png",
-  "type": "Gameplay",
   "isLibrary": true,
   "dependencies": [
     {
       "id": "monkecodegen",
-      "version": ">=0.7.4",
-      "downloadIfMissing": "https://github.com/RedBrumbler/MonkeCodegen/releases/download/v0.7.4/MonkeCodegen.qmod"
+      "version": ">=0.8.0",
+      "downloadIfMissing": "https://github.com/RedBrumbler/MonkeCodegen/releases/download/v0.8.0/MonkeCodegen.qmod"
     }
   ],
   "modFiles": [],
