@@ -8,8 +8,9 @@
     "url": "https://github.com/RedBrumbler/GorillaUtils",
     "additionalData": {
       "overrideSoName": "libgorilla-utils.so",
-      "branchName": "version-v0.1.9",
-      "soLink": "https://github.com/RedBrumbler/GorillaUtils/releases/download/0.1.9/libgorilla-utils.so"
+      "branchName": "version-v0.2.3",
+      "soLink": "https://github.com/RedBrumbler/GorillaUtils/releases/download/v0.2.3/libgorilla-utils.so",
+      "debugSoLink": "https://github.com/RedBrumbler/GorillaUtils/releases/download/v0.2.3/debug_libgorilla-utils.so"
     }
   },
   "dependencies": [
