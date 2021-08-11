@@ -3,7 +3,7 @@
   "name": "Gorilla Utils",
   "id": "gorillautils",
   "author": "RedBrumbler",
-  "version": "0.1.9",
+  "version": "0.2.3",
   "packageId": "com.AnotherAxiom.GorillaTag",
   "packageVersion": "1.0.11",
   "description": "Library that provides utils to modders",
@@ -18,8 +18,7 @@
   ],
   "modFiles": [],
   "libraryFiles": [
-    "libbeatsaber-hook_2_0_3.so",
-    "libcustom-types.so",
+    "libbeatsaber-hook_2_2_5.so",
     "libgorilla-utils.so"
   ],
   "fileCopies": []

@@ -4,7 +4,7 @@
   "info": {
     "name": "Gorilla Utils",
     "id": "gorilla-utils",
-    "version": "0.1.9",
+    "version": "0.2.3",
     "url": "https://github.com/RedBrumbler/GorillaUtils",
     "additionalData": {
       "overrideSoName": "libgorilla-utils.so",
